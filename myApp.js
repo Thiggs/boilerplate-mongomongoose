@@ -177,10 +177,13 @@ var findOneByFood = function(food, done) {
 // using `Model.findById() -> Person`.
 // Use the function argument 'personId' as search key.
 
+var personId = 0
+
 var findPersonById = function(personId, done) {
-  
-  done(null/*, data*/);
-  
+  Person.findById({_id: personId}, function(err, data){
+    if(err) return done(err);
+     done(null, data);
+  });
 };
 
 /** # CR[U]D part III - UPDATE # 
@@ -207,11 +210,16 @@ var findPersonById = function(personId, done) {
 // In that case `favoriteFoods` defaults to `Mixed` type, and you have to
 // manually mark it as edited using `document.markModified('edited-field')`
 // (http://mongoosejs.com/docs/schematypes.html - #Mixed )
+var foodToAdd = 'hamburger';
 
 var findEditThenSave = function(personId, done) {
-  var foodToAdd = 'hamburger';
-  
-  done(null/*, data*/);
+  Person.findById({_id: personId}, function(err, data){ 
+    data.favoriteFoods.push(foodToAdd)
+      data.save(function (err, data){
+    if(err) return done(err);
+     done(null, data);
+  });
+  });
 };
 
 /** 9) New Update : Use `findOneAndUpdate()` */
