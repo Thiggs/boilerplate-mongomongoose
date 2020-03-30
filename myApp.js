@@ -13,7 +13,7 @@
 // as MONGO_URI. Connect to the database using the following syntax:
 //
 // mongoose.connect(<Your URI>, { useNewUrlParser: true, useUnifiedTopology: true }); 
-
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true }); 
 
 
 /** # SCHEMAS and MODELS #
