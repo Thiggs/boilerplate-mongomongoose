@@ -41,15 +41,15 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
 // `default` values. See the [mongoose docs](http://mongoosejs.com/docs/guide.html).
 
 // <Your code here >
-const Schema = mongoose.Schema;
+var Schema = mongoose.Schema;
 
-const personSchema = new Schema({
+var personSchema = new Schema({
   name: { type: String, required: true },
   age: Number,
   favoriteFoods: [String]
 });
 
-const Person = mongoose.model("Person", personSchema);
+var Person = mongoose.model("Person", personSchema);
 
 // **Note**: Glitch is a real server, and in real servers interactions with
 // the db are placed in handler functions, to be called when some event happens
@@ -87,9 +87,15 @@ const Person = mongoose.model("Person", personSchema);
 // });
 
 var createAndSavePerson = function(done) {
-  
-  done(null /*, data*/);
-
+  var tyler=new Person({
+    name: "Tyler",
+    age: 34,
+    favoriteFoods: ["Pizza", "coffee", "beer"]
+    })
+    tyler.save(function(err, data) {
+    if(err) return done(err);
+    done(null,data);
+  });
 };
 
 /** 4) Create many People with `Model.create()` */
